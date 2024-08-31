@@ -1,0 +1,4 @@
+git config --global user.name GiovannaGrigo
+git config --global user.email giovanna1grigo@gmail.com
+
+dotnet new mvc -o Jogos

@@ -1,0 +1,19 @@
+Recriar todo o processo da Pokedex em nova tematica
+
+1. Decidir o Tema
+1.1 Criar o Repositorio
+2. Criar o banco e dados - Pode usar o ChatGPT
+3. Criar o projeto
+3.1. Criar as classes de models = tabelas do banco
+3.2. Instala os pacotes:
+    Microsoft.EntityFrameworkCore
+    Pomelo.EntityFrameworkCore.MySql
+3.3. Criar a pasta Data e classe AppDbContext
+3.4. Criar a connectionString no arquivo appsettings.json
+3.5. Adicionar os serviços no Program.cs
+3.6. Adiciona os arquivos estáticos (css, js, imagens)
+3.7. Alterar o _Layout.cshtml
+3.8. Criar as ViewModels
+3.9. Altera o HomeController
+3.10. Alterar a Index.cshtml
+3.11. Criar o Details.cshtml
