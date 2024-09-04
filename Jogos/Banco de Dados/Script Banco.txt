@@ -1,0 +1,95 @@
+INSERT GENERO
+Ação
+Aventura
+Indie
+RPG
+Fantasia
+FPS
+MOBA
+Estratégia
+Esportes
+Corrida
+Terror
+
+INSERT EMPRESA
+BANDAI NAMCO
+Team Cherry
+Square Enix
+ConcernedApe
+
+INSERT PLATAFORMA
+Playstation, Xbox, Computador, Mobile
+
+
+INSERT JOGO
+Tekken 8
+\\img\\Jogos\\01.png
+O punho encontra o destino em TEKKEN 8. Com o recorde do jogo com a narrativa mais longeva, a série TEKKEN começa um novo capítulo com TEKKEN 8 continuando a história trágica das linhagens Mishima e Kazama, com o conflito entre pai e filho capaz de abalar o mundo se iniciando seis meses após o fim de sua última batalha cheia de rancor. A história de crescimento e determinação de Jin Kazama marca um novo capítulo nesta saga atemporal.
+
+Hollow Knight
+\\img\\Jogos\\02.png
+Forje seu caminho em Hollow Knight! Uma aventura de ação épica em um vasto reino arruinado de insetos e heróis. Explore cavernas serpenteantes, lute contra criaturas malignas e alie-se a insetos bizarros num estilo clássico 2D desenhado à mão.
+
+Final Fantasy XV
+	
+A história de Final Fantasy XV é a história de Noctis. Noctis é o príncipe do reino de Lucis. Ele é prometido em casamento a Luna. Ele é enviado para encontrar sua futura noiva com seus três melhores amigos — Prompto, Gladio e Ignis — em uma viagem usando o carro de seu pai Rei Regis, o Regalia.
+
+Stardew Valley
+\\img\\Jogos\\04.png
+Você herdou a antiga fazenda do seu avô, em Stardew Valley. Com ferramentas de segunda-mão e algumas moedas, você parte para dar início a sua nova vida. Será que você vai aprender a viver da terra, a transformar esse matagal em um próspero lar?
+
+
+CREATE DATABASE IF NOT EXISTS Jogos;
+USE Jogos;
+
+CREATE TABLE IF NOT EXISTS Genero (
+	Id	  INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	Nome  VARCHAR(30) NOT NULL UNIQUE,
+	Cor   VARCHAR(25)
+);
+
+CREATE TABLE IF NOT EXISTS Empresa(
+	Id	  INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	Nome  VARCHAR(30) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS Jogo(
+	Id	  INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	Nome  VARCHAR(30) NOT NULL UNIQUE,
+    Imagem VARCHAR(300) NOT NULL,
+    Descricao VARCHAR(500) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS JogoGenero (
+	JogoId	INT UNSIGNED NOT NULL,
+    GeneroId INT UNSIGNED NOT NULL,
+    PRIMARY KEY(JogoId, GeneroId)
+);
+
+INSERT INTO Genero(Nome, Cor) VALUES
+('Ação', 'rgba(51, 153, 255, 1)'),
+('Aventura', 'rgba(255, 204, 51, 1)'),
+('Indie', 'rgba(255, 204, 51, 1)'),
+('RPG', 'rgba(119, 204, 85, 1)'),
+('Fantasia', 'rgba(255, 85, 153, 1)'),
+('FPS', 'rgba(136, 153, 255, 1)'),
+('Estratégia', 'rgba(136, 153, 255, 1)'),
+('Luta', 'rgba(255, 68, 34, 1)');
+
+INSERT INTO Empresa(Nome) VALUES
+('BANDAI NAMCO'),
+('Team Cherry'),
+('Square Enix'),
+('ConcernedApe');
+
+INSERT INTO Jogo(Nome, Imagem, Descricao) VALUES
+('Tekken 8', '\\img\\Jogos\\01.png', 'O punho encontra o destino em TEKKEN 8. Com o recorde do jogo com a narrativa mais longeva, a série TEKKEN começa um novo capítulo com TEKKEN 8 continuando a história trágica das linhagens Mishima e Kazama, com o conflito entre pai e filho capaz de abalar o mundo se iniciando seis meses após o fim de sua última batalha cheia de rancor. A história de crescimento e determinação de Jin Kazama marca um novo capítulo nesta saga atemporal.'),
+('Hollow Knight', '\\img\\Jogos\\02.png', 'Forje seu caminho em Hollow Knight! Uma aventura de ação épica em um vasto reino arruinado de insetos e heróis. Explore cavernas serpenteantes, lute contra criaturas malignas e alie-se a insetos bizarros num estilo clássico 2D desenhado à mão.'),
+('Final Fantasy XV', '\\img\\Jogos\\03.png', 'A história de Final Fantasy XV é a história de Noctis. Noctis é o príncipe do reino de Lucis. Ele é prometido em casamento a Luna. Ele é enviado para encontrar sua futura noiva com seus três melhores amigos — Prompto, Gladio e Ignis — em uma viagem usando o carro de seu pai Rei Regis, o Regalia.'),
+('Stardew Valley', '\\img\\Jogos\\04.png', 'Você herdou a antiga fazenda do seu avô, em Stardew Valley. Com ferramentas de segunda-mão e algumas moedas, você parte para dar início a sua nova vida. Será que você vai aprender a viver da terra, a transformar esse matagal em um próspero lar?');
+
+INSERT INTO JogoGenero VALUES 
+(1,8), (1,1),
+(2,1), (2,2), (2,3),
+(3,6),
+(4,3), (4,4);
