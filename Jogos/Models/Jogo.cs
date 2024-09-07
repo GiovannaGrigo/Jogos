@@ -17,4 +17,5 @@ public class Jogo
     [Required(ErrorMessage = "Informe a descrição.")]
     [StringLength(500, ErrorMessage = "A descrição deve possuir no máximo 500 caracteres")]
     public string Descricao { get; set; }
+    public ICollection<JogoGenero> Generos { get; set; }
 }

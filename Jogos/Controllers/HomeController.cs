@@ -1,21 +1,54 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Jogos.Data;
 using Jogos.Models;
+using Microsoft.EntityFrameworkCore;
+using Jogos.ViewModels;
 
 namespace Jogos.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly AppDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, AppDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-        return View();
+        HomeVM home = new()
+        {
+            Generos = _context.Generos.ToList(),
+            Jogos = _context.Jogos
+            .Include(j => j.Generos)
+            .ThenInclude(pt => pt.Genero)
+            .ToList()
+        };
+        return View(home);
+    }
+
+    public IActionResult Details(int id)
+    {
+        Jogo jogo = _context.Jogos
+            .Where(j => j.Id == id)
+            .Include(j => j.Generos)
+            .ThenInclude(pt => pt.Genero)
+            .SingleOrDefault();
+        DetailsVM details = new()
+        {
+            Atual = jogo,
+            Anterior = _context.Jogos
+                .OrderByDescending(j => j.Id)
+                .FirstOrDefault(j => j.Id < id),
+            Proximo = _context.Jogos 
+                .OrderBy(p => p.Id)
+                .FirstOrDefault(j => j.Id > id),
+        };
+        return View(details);
     }
 
     public IActionResult Privacy()
