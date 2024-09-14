@@ -6,3 +6,8 @@
     transition: 0.6s;
     z-index: 1000;
 }
+
+.gameImage{
+    width:400px;
+    border-radius: 15px;
+}

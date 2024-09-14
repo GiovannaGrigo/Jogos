@@ -11,6 +11,7 @@ public class AppDbContext: DbContext
 
     public DbSet<Genero> Generos { get; set; }
     public DbSet<Jogo> Jogos { get; set; }
+    public DbSet<Empresa> Empresas { get; set; }
     public DbSet<JogoGenero> JogoGeneros { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

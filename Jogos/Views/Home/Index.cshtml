@@ -12,15 +12,15 @@
         <div class="col mx-auto text-center">
             <h1 class="display-4 text-white">Jogos</h1>
             <div class="my-3">
-                <button id="btn-all" class="btn btn-md my-2 text-white bg-secondary btn-filter">Ver
+                <button id="btn-all" class="btn btn-md my-2 text-white bg-secondary btn-filter" onclick="filter('')">Ver
                     Todos
                 </button>
 
                 @foreach (Genero genero in Model.Generos)
                 {
-                    <button id="btn-@genero.Nome" class="btn btn-sm my-2 text-white btn-filter"
-                        style="background-color: @genero.Cor">
-                        @genero.Nome
+                    <button id="btn-@genero.Nome" onclick="filter('@genero.Nome')" class="btn btn-sm my-2 text-white btn-filter"
+                        style="background-color: @genero.Cor" >
+                        @genero.Nome 
                     </button>
                 }
             </div>
@@ -31,19 +31,19 @@
 
         @foreach (Jogo jogo in Model.Jogos)
         {
-            <div class="col @string.Join(' ', jogo.Generos.Select(g => g.Genero.Nome))">
+            <div class="col jogo @string.Join(' ', jogo.Generos.Select(g => g.Genero.Nome))">
                 <a asp-action="Details" asp-route-id="@jogo.Id" class="text-decoration-none">
                     <div class="card" style="background-color: @BackgroundColor(jogo.Generos.ToArray()[0].Genero.Cor)">
                         <img src="@jogo.Imagem" class="card-img-top" alt="@jogo.Nome" />
                         <div class="card-body">
-                            <h5 class="card-text mb-1 text-white">Nº @jogo.Id.ToString("000")</h5>
+                            <h5 class="card-text mb-1 text-white">@jogo.Empresa.Nome</h5>
                             <h3 class="card-title text-dark">@jogo.Nome</h3>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex gap-2 my-2">
                                     @foreach (JogoGenero genero in jogo.Generos)
                                     {
                                         <a href="#" class="btn text-white"
-                                         style="background-color:@genero.Genero.Cor">@genero.Genero.Nome</a>
+                                         style="background-color:@genero.Genero.Cor" onclick="filter(@genero)" >@genero.Genero.Nome</a>
                                     }
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
             <!-- Card Pokemon - Fim -->
         }
 
-        <div id="zeroPokemon" class="col-lg-12 text-center" hidden>
+        <div id="zeroJogo"class="col-lg-12 text-center d-none mt-5" style="height: 350px;">
             <h1 class="my-3 text-danger">Nenhum Jogo Encontrado</h1>
         </div>
     </div>

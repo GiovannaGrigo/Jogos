@@ -26,6 +26,7 @@ public class HomeController : Controller
             Jogos = _context.Jogos
             .Include(j => j.Generos)
             .ThenInclude(pt => pt.Genero)
+            .Include(j => j.Empresa)
             .ToList()
         };
         return View(home);
@@ -37,6 +38,7 @@ public class HomeController : Controller
             .Where(j => j.Id == id)
             .Include(j => j.Generos)
             .ThenInclude(pt => pt.Genero)
+            .Include(j => j.Empresa)
             .SingleOrDefault();
         DetailsVM details = new()
         {
